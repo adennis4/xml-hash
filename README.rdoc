@@ -1,0 +1,26 @@
+= XML-Hash
+
+XML-Hash gem takes an XML file as input, parses it, and converts it to a Hash.
+
+== Installation
+XML-Hash is available on {RubyGems}[http://rubygems.org/gems/xml-hash]; the easiest way to install it is
+
+    gem install xml-hash
+
+== Example
+
+    Hash.from_libxml(File.read('example.xml'))
+
+== Contributing to XML-Hash
+ 
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== MIT License
+
+Copyright (C) 2012 licensed under the MIT
