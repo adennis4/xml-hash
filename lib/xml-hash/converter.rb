@@ -7,7 +7,7 @@ class Hash
     end
 
     doc = XML::Parser.string(text).parse
-    {doc.root.name.snakecase.to_sym => recursively_walk(doc.root)}
+    {snakecase(doc.root.name).to_sym => recursively_walk(doc.root)}
   end
 
   def self.snakecase(string)
@@ -27,7 +27,7 @@ class Hash
     node.each_child do |child|
       if child.comment?
       elsif child.element?
-        key = child.name.snakecase.to_sym
+        key = snakecase(child.name).to_sym
 
         if response[key]
           if response[key].is_a?(Object::Array)

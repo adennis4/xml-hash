@@ -8,11 +8,13 @@ Gem::Specification.new do |s|
   s.description   = 'Converts an XML file to a Hash.'
   s.homepage      = 'http://github.com/adennis4/xml-hash'
 
-  #s.executables   = `git ls-files -- bin/*`.split('\n').map{ |f| File.basename(f) }
-  s.files         = `git ls-files`.split('\n')
-  #s.test_files    = `git ls-files -- {test,spec,features}/*`.split('\n')
+  #s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = `git ls-files`.split("\n")
+  #s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   #s.require_paths = ['lib']
   s.version       = XmlHash::VERSION
+
+  s.add_dependency('libxml-ruby')
 
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec', '~> 2.11.0')
