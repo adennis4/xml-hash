@@ -61,6 +61,21 @@ describe Hash do
         hash = Hash.from_libxml(file_text)
         hash[:inventory][:bikes][:gender].should == "boy"
       end
+
+      it "can parse a third level attribute" do
+        hash = Hash.from_libxml(file_text)
+        hash[:inventory][:bikes][:style].should_not be_nil
+      end
+
+      it "can parse a third level attribute" do
+        hash = Hash.from_libxml(file_text)
+        hash[:inventory][:bikes][:style][:level].should == "high"
+      end
+
+      it "has an array of hashes for a child with multiple elements" do
+        hash = Hash.from_libxml(file_text)
+        hash[:inventory][:bikes].class.should == Array
+      end
     end
   end
 end

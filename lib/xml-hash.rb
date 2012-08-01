@@ -4,4 +4,4 @@ module XmlHash
 end
 
 require 'xml-hash/version'
-require 'xml-hash/converter'
+require 'xml-hash/hash'
