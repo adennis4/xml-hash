@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<inventory type="vehicle">
+	<bikes gender="boy">
+		<style id="mountain" level="high" size="24">
+			<model>
+				<name>24-inch Boys Mountain Bike</name>
+				<price>$200.00</price>
+			</model>
+		</style>
+		<style id="cruiser" level="mid" size="24">
+			<model>
+				<name>24-inch Boys Cruiser Bike</name>
+				<price>$150.00</price>
+			</model>
+		</style>
+	</bikes>
+</inventory>
+

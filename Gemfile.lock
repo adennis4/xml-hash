@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    xml-hash (0.0.0)
+    xml-hash (0.1.0)
       libxml-ruby
 
 GEM

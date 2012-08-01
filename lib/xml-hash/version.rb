@@ -1,3 +1,6 @@
 module XmlHash
-  VERSION = "0.0.0"
-end
+  MAJOR = 0
+  MINOR = 1
+  PATCH = 0
+  VERSION = "#{MAJOR}.#{MINOR}.#{PATCH}"
+end 
