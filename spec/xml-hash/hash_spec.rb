@@ -42,39 +42,24 @@ describe Hash do
         File.read("spec/fixtures/inventory.xml")
       end
 
-      it "can parse a top level node" do
+      it "can parse the top level node" do
         hash = Hash.from_libxml(file_text)
         hash[:inventory].should_not be_nil
       end
 
-      it "can parse a top level attribute" do
+      it "can parse the top level attributes" do
         hash = Hash.from_libxml(file_text)
-        hash[:inventory][:type].should == "vehicle"
+        hash[:inventory].detect{|node| node.detect{|k,v| k == :type }}[:type].should == "vehicle"
       end
 
-      it "can parse a second level node" do
+      it "can parse a node two levels down" do
         hash = Hash.from_libxml(file_text)
-        hash[:inventory][:bikes].should_not be_nil
+        hash[:inventory].detect{|node| node.detect{|k,v| k == :bikes }}[:bikes].should_not be_nil
       end
 
-      it "can parse a second level attribute" do
+      it "can parse the attributes of a node two levels down" do
         hash = Hash.from_libxml(file_text)
-        hash[:inventory][:bikes][:gender].should == "boy"
-      end
-
-      it "can parse a third level attribute" do
-        hash = Hash.from_libxml(file_text)
-        hash[:inventory][:bikes][:style].should_not be_nil
-      end
-
-      it "can parse a third level attribute" do
-        hash = Hash.from_libxml(file_text)
-        hash[:inventory][:bikes][:style][:level].should == "high"
-      end
-
-      it "has an array of hashes for a child with multiple elements" do
-        hash = Hash.from_libxml(file_text)
-        hash[:inventory][:bikes].class.should == Array
+        hash[:inventory].detect{|node| node.detect{|k,v| k == :bikes }}[:bikes].first[:gender].should == "boy"
       end
     end
   end

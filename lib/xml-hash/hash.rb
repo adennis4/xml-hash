@@ -1,4 +1,5 @@
 require "xml/libxml"
+require "ap"
 
 class Hash
   def self.from_libxml(text, options={})
@@ -7,7 +8,9 @@ class Hash
     end
 
     doc = XML::Parser.string(text).parse
-    {snakecase(doc.root.name).to_sym => recursively_walk(doc.root)}
+#    {snakecase(doc.root.name).to_sym => recursively_walk(doc.root)}
+    recursively_show(doc.root, hash = {})
+    hash
   end
 
   def self.snakecase(string)
@@ -21,10 +24,44 @@ class Hash
     end
   end
 
+  def self.recursively_show(node, hash_map)
+    unless node.comment?
+      node_key = snakecase(node.name).to_sym
+      hash_map[node_key] = []
+
+      symbolize(node.attributes.to_h).each do |k,v|
+        hash_map[node_key] << {k => v}
+      end
+
+      node.each_child do |child|
+        child_key = snakecase(child.name).to_sym
+
+        unless child.comment?
+          if child.element?
+
+            child_hash = {}
+            hash_map[node_key] << child_hash
+            recursively_show(child, child_hash)
+
+          else
+
+            hash_map[node_key] << {node_key => child.content}
+
+          end
+        end
+      end
+
+    end
+  end
+
   def self.recursively_walk(node)
-    response = {}
+    node_key = snakecase(node.name).to_sym
+    node_array = []
+    node_response = {node_key => []}
 
     node.each_child do |child|
+      response = node_response[node_key]
+
       if child.comment?
       elsif child.element?
         key = snakecase(child.name).to_sym
@@ -47,6 +84,14 @@ class Hash
       end
     end
 
-    response
+    node_response[node_key].merge!(symbolize(node.attributes.to_h)) unless node.attributes.to_h.empty?
+
+puts "node_response: #{node_response.inspect}"
+
+    node_response[node_key]
+  end
+
+  def add_attributes(node, attributes)
+    node.merge!(attributes)
   end
 end
