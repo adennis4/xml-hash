@@ -42,7 +42,7 @@ class Hash
             hash_map[node_key] << child_hash
             recursively_show(child, child_hash)
           else
-            hash_map[node_key] << {node_key => child.content}
+            hash_map[node_key] = child.content
           end
         end
       end
