@@ -1,5 +1,4 @@
 require "xml/libxml"
-require "ap"
 
 class Hash
   def self.from_libxml(text, options={})
@@ -8,7 +7,6 @@ class Hash
     end
 
     doc = XML::Parser.string(text).parse
-#    {snakecase(doc.root.name).to_sym => recursively_walk(doc.root)}
     recursively_show(doc.root, hash = {})
     hash
   end
