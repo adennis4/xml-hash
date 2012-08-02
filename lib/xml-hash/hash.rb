@@ -38,60 +38,15 @@ class Hash
 
         unless child.comment?
           if child.element?
-
             child_hash = {}
             hash_map[node_key] << child_hash
             recursively_show(child, child_hash)
-
           else
-
             hash_map[node_key] << {node_key => child.content}
-
           end
         end
       end
 
     end
-  end
-
-  def self.recursively_walk(node)
-    node_key = snakecase(node.name).to_sym
-    node_array = []
-    node_response = {node_key => []}
-
-    node.each_child do |child|
-      response = node_response[node_key]
-
-      if child.comment?
-      elsif child.element?
-        key = snakecase(child.name).to_sym
-
-        if response[key]
-          if response[key].is_a?(Object::Array)
-            response[key] << recursively_walk(child)
-          else
-            response[key] = [response[key]] << recursively_walk(child)
-          end
-        else
-          response[key] = recursively_walk(child)
-        end
-      else
-        if node.attributes.to_h.empty?
-          return child.content
-        else
-          response = {:value => child.content}.merge(symbolize(node.attributes.to_h))
-        end
-      end
-    end
-
-    node_response[node_key].merge!(symbolize(node.attributes.to_h)) unless node.attributes.to_h.empty?
-
-puts "node_response: #{node_response.inspect}"
-
-    node_response[node_key]
-  end
-
-  def add_attributes(node, attributes)
-    node.merge!(attributes)
   end
 end
