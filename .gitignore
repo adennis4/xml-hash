@@ -2,6 +2,7 @@
 /.bundle
 
 .DS_Store
+*.swp
 
 pkg
 *.gem
